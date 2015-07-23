@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Smart Bid</title>
+	<meta name="description" content="online auction using smart contracts">
+	<meta name="author" content="James Carlyle">
+
+	<link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+	<link rel="stylesheet" href="css/theme.css" media="screen">
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body role="document"><!-- data-spy="scroll" data-target="#navigation-bar" data-offset="60"  -->
+<nav class="navbar navbar-inverse navbar-fixed-top" id="navigation-bar">
+	<div class="container-fluid">
+		<ul class="nav navbar-nav">
+			<li><a href="#home#home">Smart Bid</a></li>
+			<li><a href="#home#how">How</a></li>
+			<li><a href="#home#config">Configure</a></li>
+			<li><a href="#list">List</a></li>
+			<li><a href="#bid">Bid</a></li>
+			<li><a href="#home#report">View</a></li>
+			<li><a href="#home#release">Receive</a></li>
+			<li><a href="#home#resolve">Resolve</a></li>
+			<li><a href="#home#log">Log</a></li>
+		</ul>
+	</div>
+</nav>
+<div id="view-area" ng-view></div>
+</body>
+<!-- <script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script> -->
+<script src="js/angular.min.js"></script>
+<script src="js/angular-animate.min.js"></script>
+<script src="js/angular-route.min.js"></script>
+<script src="js/bignumber.js"></script>
+<script src="js/web3.js"></script>
+<script src="js/app.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/services.js"></script>
+<script type="text/ng-template" id="home-template">
+<div id="home" class="cover vertical-centre">
+	<div class="container-fluid content">
+		<h1>Smart Bid</h1>
+		<p class="lead">The secure place to buy and sell</p>
+		<p><button class="btn btn-primary btn-lg" ng-click="auctionManager.scrollSmooth('#how')">Learn more</button></p>
+	</div>
+</div>
+<div id="how" class="container-fluid content">
+	<h2>How does Smart Bid work?</h2>
+	<p>Smart Bid is an auction system built upon smart contracts, and implemented on top of a widely-distributed record of who has bid for what.</p>
+	<p>This means that the auctioned items and bids cannot be corrupted or manipulated by anyone.</p>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3><span class="glyphicon glyphicon-list-alt"></span> <a href="#list">List</a></h3>
+				</div>
+				<div class="panel-body">
+						1. The seller starts by creating a listing for the item for sale in the auction contract. They'll need to specify the auction duration, the title and description, and the URL of a photo of their item. The contract doesn't allow them to manipulate the listing.
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3><span class="glyphicon glyphicon-bullhorn"></span> <a href="#bid">Bid</a></h3>
+				</div>
+				<div class="panel-body">
+					2. At the time you bid on an item for sale, you supply funds to cover your bid, and the auction contract holds your bid funds securely. You are committed to your bid. If you are outbid before the end of the auction, your bid is returned.
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3><span class="glyphicon glyphicon-heart"></span> Win</h3>
+				</div>
+				<div class="panel-body">
+					3. The auction for the item ends at the time originally specified by the seller. If you are the highest bidder then, you've won!
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3><span class="glyphicon glyphicon-gift"></span> Receive</h3>
+				</div>
+				<div class="panel-body">
+					4. In exchange for receiving the item from the seller, you'll need to notify the seller of the secret you specified when you placed your bid. If you're not happy with the item, don't take delivery of the item and don't tell your bid secret to the seller.
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3><span class="glyphicon glyphicon-transfer"></span> <a href="#release">Release</a></h3>
+				</div>
+				<div class="panel-body">
+					5. The seller can then use the secret you exchanged for the item to prove that they have delivered the item to you, and only then will your bid funds be released to them.
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3><span class="glyphicon glyphicon-question-sign"></span> <a href="#resolve">Resolve</a></h3>
+				</div>
+				<div class="panel-body">
+					6. If for any reason the seller doesn't deliver the item to you within a deadline, or you have declined to receive the item because it is not as described, you can claim non-delivery and your bid funds will be returned to you.
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="config" class="container-fluid content">
+	<h2>Configure SmartBid</h2>
+	<p>
+		<span class="glyphicon glyphicon-briefcase"></span> Contract: 
+		<select class="form-control" ng-model="auctionManager.contract">
+			<option ng-repeat="contract in auctionManager.contracts">{{contract}}</option>
+		</select>
+		<span class="glyphicon glyphicon-user"></span> User account: 
+		<select class="form-control" ng-model="auctionManager.account">
+			<option ng-repeat="account in auctionManager.accounts">{{account}}</option>
+		</select>
+	</p>
+</div>
+<div id="report" class="container-fluid content">
+	<h2><span class="glyphicon glyphicon-search"></span> View details of an item for sale</h2>
+	<div class="panel panel-primary">
+		<div class="panel-body">
+			<form role="form" ng-submit="auctionManager.reportAuction()">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="please enter the ID of the auction that you wish to view" ng-model="auctionManager.auctionID"/>
+				</div>
+				<input type="submit" class="btn btn-primary" value="view auction status"/>
+			</form>
+		</div>
+	</div>
+	<div class="panel panel-primary" ng-show="auctionManager.auctionID">
+		<div class="panel-body">
+			<p>Item name : {{auctionManager.itemName}}</p>
+			<p>End time : {{auctionManager.auctionEndTime}}</p>
+			<p>Time remaining : {{auctionManager.timeRemaining}}</p>
+			<p>Status : {{auctionManager.status}}</p>
+			<p>Number of bids : {{auctionManager.numBids}}</p>
+			<p ng-show="auctionManager.numBids > 0">Current bid : {{auctionManager.highestBidAmount}}</p>
+			<p ng-show="auctionManager.numBids > 0">Highest bidder : {{auctionManager.highestBidder}}</p>
+		</div>
+	</div>
+</div>
+<div id="release" class="container-fluid content">
+	<h2><span class="glyphicon glyphicon-search"></span> Release bidder's funds to seller</h2>
+	<div class="panel panel-primary">
+		<div class="panel-body">
+			<form role="form" ng-submit="auctionManager.reportAuction()">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="please enter the ID of the auction that you wish to release" ng-model="auctionManager.auctionID"/>
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="please enter the seller's secret" ng-model="auctionManager.releaseSecret"/>
+				</div>
+				<input type="submit" class="btn btn-primary" value="release funds to seller"/>
+			</form>
+		</div>
+	</div>
+</div>
+<div id="resolve" class="container-fluid content">
+	<h2><span class="glyphicon glyphicon-search"></span> Resolve issues</h2>
+	<div class="panel panel-primary">
+		<div class="panel-body">
+			<form role="form" ng-submit="auctionManager.reportAuction()">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="please enter the ID of the auction that you wish to resolve" ng-model="auctionManager.auctionID"/>
+				</div>
+				<input type="submit" class="btn btn-primary" value="reclaim bid funds"/>
+			</form>
+		</div>
+	</div>
+</div>
+<div id="log" class="container-fluid content">
+	<h2><span class="glyphicon glyphicon-dashboard"></span> View all logged events from the contract</h2>
+	<div>
+		<button type="button" class="btn btn-primary" ng-click="auctionManager.switchLogging()">
+			<span class="glyphicon glyphicon-pencil"></span> {{auctionManager.logging ? 'disable ' : 'enable' }} logging 
+		</button>
+	</div>
+	<div class="alert alert-success" role="alert"  ng-repeat="log in auctionManager.bidSuccessLog">
+		<strong>Bidder:{{log.bidderAddress}}</strong> has successfully bid on auction {{log.auctionID}} run by {{log.sellerAddress}}. There have been {{log.numBids}} bids and the highest bid has reached {{log.bidAmount}} wei.
+	</div>
+	<div class="alert alert-danger" role="alert"  ng-repeat="log in auctionManager.bidFailureLog">
+		<strong>Bidder:{{log.bidderAddress}}</strong> was unable to bid on auction {{log.auctionID}} run by {{log.sellerAddress}}, because the {{log.failureReason}}.
+	</div>
+	<div class="alert alert-info" role="alert"  ng-repeat="log in auctionManager.miscMessageLog">
+		The auction with ID {{log.auctionID}} held by <strong>seller:{{log.sellerAddress}}</strong> either started or finished or had funds released. To be refactored :)
+	</div>
+</div>
+</script>
+<script type="text/ng-template" id="list-template">
+<div id="list" class="container-fluid content">
+	<h2><span class="glyphicon glyphicon-list-alt"></span> List your item using our standard contract</h2>
+	<div class="panel panel-primary">
+		<div class="panel-body">
+			<form role="form" ng-submit="auctionManager.createAuction()">
+				<div class="form-group">
+					<label for="itemName">Item name</label>
+					<input type="text" class="form-control" id="itemName" required placeholder="please choose a descriptive name for the item for sale" ng-model="auctionManager.itemName"/>
+				</div>
+				<div class="form-group">
+					<label for="category">Category</label>
+					<select class="form-control" required placeholder="please choose a category for the item" ng-model="auctionManager.category">
+						<option value="0">Electronics</option>
+						<option value="1">Home</option>
+						<option value="2">Sporting Goods</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="itemName">Auction duration in days</label>
+					<select class="form-control" required ng-model="auctionManager.durationDays">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+					</select>
+				</div>
+				<input type="submit" class="btn btn-primary" value="list your item for auction"/>
+			</form>
+		</div>
+	</div>
+</div>
+</script>
+<script type="text/ng-template" id="bid-template">
+<div id="bid" class="container-fluid content">
+	<h2><span class="glyphicon glyphicon-bullhorn"></span> Place a bid for an item</h2>
+	<div class="panel panel-primary">
+		<div class="panel-body">
+			<form role="form" ng-submit="auctionManager.placeBid()">
+				<div class="form-group">
+					<label for="auctionID">Auction ID</label>
+					<input type="text" id="auctionID" class="form-control" placeholder="please enter the ID of the item you wish to bid on" 
+					ng-model="auctionManager.auctionID"/>
+				</div>
+			<div class="form-group">
+					<label for="releaseSecret">Release secret</label>
+					<input type="text" id="releaseSecret" class="form-control" placeholder="please enter the sha3 hash of a secret that the seller can use to prove delivery" 
+						ng-model="auctionManager.releaseSecret"/>
+				</div>
+				<div class="form-group">
+					<label for="bidAmount">Bid amount</label>
+					<div class="input-group">
+						<span class="input-group-addon">$</span>
+						<input type="text" id="bidAmount" class="form-control" placeholder="please enter the amount you wish to bid" ng-model="auctionManager.bidAmount"/>
+					</div>
+				</div>
+				<input type="submit" class="btn btn-primary" value="place a binding bid for this item"/>
+			</form>
+		</div>
+	</div>
+</div>
+</script>
+</html>

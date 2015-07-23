@@ -1,0 +1,367 @@
+{
+	"applicationUrlEth": "",
+	"applicationUrlHttp": "",
+	"deploymentAddresses": [],
+	"deploymentDir": "",
+	"files": [
+		{
+			"fileName": "contract.sol",
+			"title": "DBayContract"
+		},
+		{
+			"fileName": "index.html",
+			"title": "index.html"
+		}
+	],
+	"packageBase64": "",
+	"packageHash": "",
+	"title": "ethereum-dbay",
+	"states": [
+		{
+			"accounts": [
+				{
+					"address": "38f388fadf4a6a35c61c3f88194ec5ae162c8944",
+					"balance": {
+						"unit": 12,
+						"value": "1000000"
+					},
+					"name": "Account-38f3",
+					"secret": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074"
+				}
+			],
+			"contracts": [],
+			"miner": {
+				"address": "38f388fadf4a6a35c61c3f88194ec5ae162c8944",
+				"balance": {
+					"objectName": "",
+					"value": "1000000",
+					"unit": 12
+				},
+				"name": "Account-38f3",
+				"secret": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074"
+			},
+			"title": "Default",
+			"transactions": [
+				{
+					"contractId": "Config",
+					"functionId": "Config",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"parameters": {},
+					"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+					"stdContract": true,
+					"url": "qrc:///stdc/std.sol",
+					"value": {
+						"unit": 18,
+						"value": "0"
+					}
+				},
+				{
+					"contractId": "NameReg",
+					"functionId": "NameReg",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"parameters": {},
+					"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+					"stdContract": true,
+					"url": "qrc:///stdc/std.sol",
+					"value": {
+						"unit": 18,
+						"value": "0"
+					}
+				},
+				{
+					"contractId": "DBayContract",
+					"functionId": "DBayContract",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"parameters": {},
+					"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+					"stdContract": false,
+					"value": {
+						"unit": 18,
+						"value": "0"
+					}
+				}
+			]
+		},
+		{
+			"accounts": [
+				{
+					"address": "38f388fadf4a6a35c61c3f88194ec5ae162c8944",
+					"balance": {
+						"unit": 12,
+						"value": "1000000"
+					},
+					"name": "Account-seller",
+					"secret": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074"
+				},
+				{
+					"address": "acf76766e4f9ec9fb6f5d43b28e476769c1de915",
+					"balance": {
+						"unit": 12,
+						"value": "1000000"
+					},
+					"name": "Account-bidder-1",
+					"secret": "c59ae76baa529e47a5f1ed4ed0d25c83a593d2e062273e9eca83a8a1fd6ffbd1"
+				},
+				{
+					"address": "660bd6482cdcb2c788976389d5bfe51217266f72",
+					"balance": {
+						"unit": 12,
+						"value": "1000000"
+					},
+					"name": "Account-bidder-2",
+					"secret": "7efcae99496af8ff9386ee3080f230d29578d25bad23f41f7ef7f585fc80bd8a"
+				}
+			],
+			"contracts": [],
+			"miner": {
+				"address": "38f388fadf4a6a35c61c3f88194ec5ae162c8944",
+				"balance": {
+					"objectName": "",
+					"value": "1000000",
+					"unit": 12,
+					"value": "1000000",
+					"unit": 12
+				},
+				"name": "Account-seller",
+				"secret": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074"
+			},
+			"title": "Create Auction",
+			"transactions": [
+				{
+					"contractId": "Config",
+					"functionId": "Config",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"parameters": {},
+					"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+					"stdContract": true,
+					"url": "qrc:///stdc/std.sol",
+					"value": {
+						"unit": 18,
+						"value": "0"
+					}
+				},
+				{
+					"contractId": "NameReg",
+					"functionId": "NameReg",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"parameters": {},
+					"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+					"stdContract": true,
+					"url": "qrc:///stdc/std.sol",
+					"value": {
+						"unit": 18,
+						"value": "0"
+					}
+				},
+				{
+					"contractId": "DBayContract",
+					"functionId": "DBayContract",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"parameters": {},
+					"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+					"stdContract": false,
+					"value": {
+						"unit": 18,
+						"value": "0"
+					}
+				},
+				{
+					"contractId": "DBayContract",
+					"functionId": "createAuction",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"parameters": {
+						"_category": "1",
+						"_itemName": "Popcorn Maker",
+						"_timeLimit": "1433510395",
+						"_timelimit": "1430909880",
+						"_auctionEndTime": "1440000000"
+					},
+					"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+					"value": {
+						"unit": 18,
+						"value": "0"
+					}
+				},
+				{
+					"contractId": "DBayContract",
+					"functionId": "placeBid",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"parameters": {
+						"_auctionID": "0",
+						"_releaseHash": "decafbad1",
+						"_releaseSecret": "abc"
+					},
+					"sender": "c59ae76baa529e47a5f1ed4ed0d25c83a593d2e062273e9eca83a8a1fd6ffbd1",
+					"stdContract": false,
+					"value": {
+						"unit": 13,
+						"value": "999"
+					}
+				},
+				{
+					"contractId": "DBayContract",
+					"functionId": "placeBid",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"parameters": {
+						"_auctionID": "0",
+						"_releaseHash": "decafbad2",
+						"_releaseSecret": "def",
+						"_seller": "0x660bd6482cdcb2c788976389d5bfe51217266f72"
+					},
+					"sender": "7efcae99496af8ff9386ee3080f230d29578d25bad23f41f7ef7f585fc80bd8a",
+					"stdContract": false,
+					"value": {
+						"unit": 13,
+						"value": "1900"
+					}
+				},
+				{
+					"contractId": "DBayContract",
+					"functionId": "reportAuction",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"parameters": {
+						"_auctionID": "0"
+					},
+					"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+					"stdContract": false,
+					"value": {
+						"unit": 18,
+						"value": "0"
+					}
+				},
+				{
+					"contractId": "DBayContract",
+					"functionId": "endAuction",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"parameters": {
+						"_auctionID": "0"
+					},
+					"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+					"value": {
+						"unit": 18,
+						"value": "0"
+					}
+				},
+				{
+					"contractId": "DBayContract",
+					"functionId": "releaseFunds",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"parameters": {
+						"_auctionID": "0",
+						"_releaseSecret": "def"
+					},
+					"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+					"value": {
+						"unit": 18,
+						"value": "0"
+					}
+				},
+				{
+					"contractId": "DBayContract",
+					"functionId": "reportAuction",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"parameters": {
+						"_auctionID": "0"
+					},
+					"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+					"value": {
+						"unit": 18,
+						"value": "0"
+					}
+				}
+			]
+		}
+	],
+	"defaultStateIndex": 0
+}
